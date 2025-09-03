@@ -9,7 +9,7 @@
     "lint": "eslint src/"
   },
   "keywords": [],
-  "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
+  "author": "HN ",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
