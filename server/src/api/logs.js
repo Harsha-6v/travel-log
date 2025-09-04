@@ -47,6 +47,32 @@ router.post('/', limiter, async (req, res, next) => {
   }
 });
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    if (req.get('X-API-KEY') !== process.env.API_KEY) {
+      res.status(401);
+      throw new Error('UnAuthorized');
+    }
+    const { id } = req.params;
+    
+    const updatedEntry = await LogEntry.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+
+    if (!updatedEntry) {
+      res.status(404);
+      throw new Error('Log entry not found');
+    }
+
+    res.json(updatedEntry);
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      res.status(422);
+    }
+    next(error);
+  }
+});
+
 router.delete('/:id', async (req, res, next) => {
   try {
 

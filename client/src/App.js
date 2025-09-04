@@ -12,13 +12,13 @@ const App = () => {
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
-    latitude: 37.6,
-    longitude: -95.665,
-    zoom: 3
+    latitude: 22.5937,
+    longitude: 78.9629,
+    zoom: 4
   });
 
   const [deletingEntry, setDeletingEntry] = useState(null);
-
+  const [editingEntry, setEditingEntry] = useState(null);
   const getEntries = async () => {
     const logEntries = await listLogEntries();
     setLogEntries(logEntries);
@@ -54,6 +54,11 @@ const App = () => {
     }
   };
 
+  const handleEditClick = (entry) => {
+    setShowPopup({});
+    setEditingEntry(entry);
+  };
+
   return (
     <ReactMapGL
       {...viewport}
@@ -73,6 +78,7 @@ const App = () => {
                 onClick={() => {
                   setShowPopup({ [entry._id]: true });
                   setDeletingEntry(null); // Ensure delete dialog is closed when opening a new popup
+                  setEditingEntry(null);
                 }}
               >
                 <svg
@@ -101,12 +107,10 @@ const App = () => {
                     <p>{entry.comments}</p>
                     <small>Visited on: {new Date(entry.visitDate).toLocaleDateString()}</small>
                     {entry.image && <img src={entry.image} alt={entry.title} />}
-                    <button 
-                      style={{backgroundColor: '#f05305', color: 'white', border: 'none', padding: '8px', cursor: 'pointer', marginTop: '10px'}}
-                      onClick={() => handleDeleteClick(entry._id)}
-                    >
-                      Delete Entry
-                    </button>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                      <button onClick={() => handleEditClick(entry)}>Edit</button>
+                      <button onClick={() => handleDeleteClick(entry._id)}>Delete</button>
+                    </div>
                   </div>
                 </Popup>
               ) : null
@@ -151,7 +155,7 @@ const App = () => {
           </>
         ) : null
       }
-      {/* This new block will render the delete confirmation popup */}
+      
       {
         deletingEntry && (
           <Popup
@@ -172,6 +176,29 @@ const App = () => {
           </Popup>
         )
       }
+
+      {editingEntry && (
+        <Popup
+          latitude={editingEntry.latitude}
+          longitude={editingEntry.longitude}
+          closeButton={true}
+          closeOnClick={false}
+          dynamicPosition={true}
+          onClose={() => setEditingEntry(null)}
+          anchor="top"
+        >
+          <div className="popup">
+            <LogEntryForm
+              entry={editingEntry}
+              onClose={() => {
+                setEditingEntry(null);
+                getEntries();
+              }}
+            />
+          </div>
+        </Popup>
+      )}
+
     </ReactMapGL>
   );
 }

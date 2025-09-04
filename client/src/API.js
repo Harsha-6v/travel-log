@@ -5,21 +5,6 @@ export async function listLogEntries() {
   return response.json();
 }
 
-export async function deleteLogEntry(id, apiKey) {
-  const response = await fetch(`${API_URL}/api/logs/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'X-API-KEY': apiKey,
-    },
-  });
-  if (response.ok) {
-    return response.json();
-  }
-  const json = await response.json();
-  const error = new Error(json.message);
-  throw error;
-}
-
 export async function createLogEntry(entry) {
   const apiKey = entry.apiKey;
   delete entry.apiKey;
@@ -45,5 +30,39 @@ export async function createLogEntry(entry) {
   }
   const error = new Error(json.message);
   error.response = json;
+  throw error;
+}
+
+export async function updateLogEntry(id, entry) {
+  const apiKey = entry.apiKey;
+  delete entry.apiKey;
+  const response = await fetch(`${API_URL}/api/logs/${id}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      'X-API-KEY': apiKey,
+    },
+    body: JSON.stringify(entry),
+  });
+  const json = await response.json();
+  if (response.ok) {
+    return json;
+  }
+  const error = new Error(json.message);
+  throw error;
+}
+
+export async function deleteLogEntry(id, apiKey) {
+  const response = await fetch(`${API_URL}/api/logs/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'X-API-KEY': apiKey,
+    },
+  });
+  if (response.ok) {
+    return response.json();
+  }
+  const json = await response.json();
+  const error = new Error(json.message);
   throw error;
 }
