@@ -9,16 +9,16 @@ const DeleteConfirmation = ({ onConfirm, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="entry-form">
+    <form onSubmit={handleSubmit(onSubmit)} className="popup-form">
       <h4>Confirm Deletion</h4>
       <p>Please enter your API Key to delete this entry.</p>
       <label htmlFor="apiKey">API KEY</label>
       <input type="password" name="apiKey" required ref={register} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-        <button type="button" onClick={onCancel} style={{ backgroundColor: '#ccc', color: 'black', border: 'none', padding: '8px', cursor: 'pointer' }}>
+      <div className="popup-buttons-container">
+        <button type="button" onClick={onCancel} className="btn-secondary">
           Cancel
         </button>
-        <button type="submit" style={{ backgroundColor: '#f05305', color: 'white', border: 'none', padding: '8px', cursor: 'pointer' }}>
+        <button type="submit" className="btn-danger">
           Confirm Delete
         </button>
       </div>

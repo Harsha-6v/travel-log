@@ -39,8 +39,8 @@ const LogEntryForm = ({ location, entry, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="entry-form">
-      { error ? <h3 className="error">{error}</h3> : null}
+    <form onSubmit={handleSubmit(onSubmit)} className="popup-form">
+      { error ? <h3 className="error">{error}</h3> : <h4>{isEditing ? 'Edit Entry' : 'Create New Entry'}</h4>}
       <label htmlFor="apiKey">API KEY</label>
       <input type="password" name="apiKey" required ref={register} />
       <label htmlFor="title">Title</label>
@@ -53,7 +53,7 @@ const LogEntryForm = ({ location, entry, onClose }) => {
       <input name="image" ref={register} />
       <label htmlFor="visitDate">Visit Date</label>
       <input name="visitDate" type="date" required ref={register} />
-      <button disabled={loading}>
+      <button className="btn-primary" disabled={loading}>
         {loading ? 'Loading...' : isEditing ? 'Update Entry' : 'Create Entry'}
       </button>
     </form>

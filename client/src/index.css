@@ -20,29 +20,215 @@ body {
   fill: #f05305;
 }
 
-.marker.yellow path {
-  fill: #F3B73E;
+.marker.green path {
+  fill: #77c653;
 }
 
+
+
+.loading-screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.search-container {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.search-bar {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.search-input {
+  border: 3px solid #111111ff;
+  padding: 8px;
+  border-radius: 3px;
+  width: 250px;
+}
+
+.search-results {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+.mapboxgl-popup-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* 2. Style our custom inner div with the new dark theme */
 .popup {
-  width: 40vw;
-  padding: 1rem;
+  max-width: 320px;
+  background-color: #66666383; /* Dark background */
+  color: #f1f1f1; /* Light text */
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.popup img {
-  height: 200px;
-  width: auto;
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-}
-
-.entry-form label,
-.entry-form input,
-.entry-form textarea,
-.entry-form button {
+/* 3. Style the close button for the dark theme */
+.mapboxgl-popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
   font-size: 1rem;
-  margin: 0.5rem 0;
-  display: block;
+  font-weight: bold;
+  color: #f1f1f1;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* 4. General styling for elements inside our popup */
+.popup img {
   width: 100%;
+  height: auto;
+  max-height: 200px;
+  display: block;
+  margin-top: 0.75rem;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.popup h3 {
+  font-size: 1.3rem;
+  margin: 0 0 0.5rem 0;
+  color: #f9fbfa; /* A nice accent color */
+}
+
+.popup p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 0.5rem 0;
+}
+
+.popup small {
+  font-size: 0.8rem;
+  color: #f4f8f6;
+}
+
+.popup-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 10px;
+}
+
+/* 5. Consistent styles for all forms inside a popup */
+.popup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-form h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: #f4f6f7;
+}
+
+.popup-form label {
+  margin: 0.5rem 0 0.2rem 0;
+  font-size: 0.85rem;
+  color: #fcfefe;
+}
+
+.popup-form input,
+.popup-form textarea {
+  font-size: 1rem;
+  padding: 8px;
+  border: 1px solid #444;
+  background-color: #666663e1;
+  color: #f1f1f1;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box; /* Important for width */
+}
+
+.popup-form input:focus,
+.popup-form textarea:focus {
+  outline: none;
+  border-color: #61dafb;
+}
+
+.popup-form .error {
+  color: #e74c3c;
+  margin: 0.5rem 0;
+}
+
+/* 6. Consistent button styles */
+.popup-form button,
+.popup button {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+  margin-top: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+.btn-primary:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-secondary {
+  background-color: #555;
+  color: white;
+}
+.btn-secondary:hover {
+  background-color: #666;
 }
