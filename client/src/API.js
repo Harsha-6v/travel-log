@@ -5,6 +5,21 @@ export async function listLogEntries() {
   return response.json();
 }
 
+export async function deleteLogEntry(id, apiKey) {
+  const response = await fetch(`${API_URL}/api/logs/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'X-API-KEY': apiKey,
+    },
+  });
+  if (response.ok) {
+    return response.json();
+  }
+  const json = await response.json();
+  const error = new Error(json.message);
+  throw error;
+}
+
 export async function createLogEntry(entry) {
   const apiKey = entry.apiKey;
   delete entry.apiKey;
