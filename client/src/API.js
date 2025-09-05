@@ -1,4 +1,7 @@
-const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:1337' : 'https://travel-log-api.now.sh';
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:1337"
+    : "https://travel-log-api-kappa.vercel.app";
 
 export async function listLogEntries() {
   const response = await fetch(`${API_URL}/api/logs`);
@@ -9,15 +12,15 @@ export async function createLogEntry(entry) {
   const apiKey = entry.apiKey;
   delete entry.apiKey;
   const response = await fetch(`${API_URL}/api/logs`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'content-type': 'application/json',
-      'X-API-KEY': apiKey, 
+      "content-type": "application/json",
+      "X-API-KEY": apiKey,
     },
     body: JSON.stringify(entry),
   });
   let json;
-  if (response.headers.get('content-type').includes('text/html')) {
+  if (response.headers.get("content-type").includes("text/html")) {
     const message = await response.text();
     json = {
       message,
@@ -37,10 +40,10 @@ export async function updateLogEntry(id, entry) {
   const apiKey = entry.apiKey;
   delete entry.apiKey;
   const response = await fetch(`${API_URL}/api/logs/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'content-type': 'application/json',
-      'X-API-KEY': apiKey,
+      "content-type": "application/json",
+      "X-API-KEY": apiKey,
     },
     body: JSON.stringify(entry),
   });
@@ -54,9 +57,9 @@ export async function updateLogEntry(id, entry) {
 
 export async function deleteLogEntry(id, apiKey) {
   const response = await fetch(`${API_URL}/api/logs/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'X-API-KEY': apiKey,
+      "X-API-KEY": apiKey,
     },
   });
   if (response.ok) {
