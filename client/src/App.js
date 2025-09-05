@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
-import { listLogEntries, deleteLogEntry } from "./API";
+import { listLogEntries, deleteLogEntry} from './API';
 import LogEntryForm from "./LogEntryForm";
 import DeleteConfirmation from "./DeleteConfirmation";
 

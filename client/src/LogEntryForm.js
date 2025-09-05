@@ -41,7 +41,7 @@ const LogEntryForm = ({ location, entry, onClose }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="popup-form">
       { error ? <h3 className="error">{error}</h3> : <h4>{isEditing ? 'Edit Entry' : 'Create New Entry'}</h4>}
-      <label htmlFor="apiKey">API KEY</label>
+      <label htmlFor="apiKey">PASS KEY</label>
       <input type="password" name="apiKey" required ref={register} />
       <label htmlFor="title">Title</label>
       <input name="title" required ref={register} />

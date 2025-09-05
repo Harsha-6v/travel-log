@@ -37,42 +37,91 @@ body {
 
 .search-container {
   position: absolute;
-  top: 10px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 10; /* Ensure it's above the map */
+  width: 320px;
 }
 
 .search-bar {
-  background-color: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  background-color: #282c3496; /* Match popup dark theme */
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .search-input {
-  border: 3px solid #111111ff;
-  padding: 8px;
-  border-radius: 3px;
-  width: 250px;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #f1f1f1;
+  background-color: #333842d1;
+  border: 1px solid #444;
+  border-radius: 6px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #61dafb; /* Accent color on focus */
+}
+
+.search-input::placeholder {
+  color: #aaa;
 }
 
 .search-results {
   list-style-type: none;
+  color: #fcf8f8;
   padding: 0;
-  margin: 5px 0 0 0;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  max-height: 200px;
-  overflow-y: auto;
+  margin: 8px 0 0 0;
+  background-color: #282c34b9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 240px; /* Set a max height for the list */
+  overflow-y: auto; /* This makes the list scrollable */
 }
 
-.search-result-item {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
+/* Custom Scrollbar Styling */
+.search-results::-webkit-scrollbar {
+  width: 8px;
 }
+
+.search-results::-webkit-scrollbar-track {
+  background: #333842;
+  border-radius: 8px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 8px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+  background: #61dafb;
+}
+
+
+.search-result-item {
+  padding: 12px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #333842;
+  transition: background-color 0.2s;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #333842;
+  color: #61dafb;
+}
+
 .mapboxgl-popup-content {
   background: transparent !important;
   box-shadow: none !important;
@@ -82,7 +131,7 @@ body {
 /* 2. Style our custom inner div with the new dark theme */
 .popup {
   max-width: 320px;
-  background-color: #66666383; /* Dark background */
+  background-color: #282c34cf; /* Dark background */
   color: #f1f1f1; /* Light text */
   padding: 1.25rem;
   border-radius: 10px;
